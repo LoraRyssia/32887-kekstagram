@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм» [![Build status][travis-image]][travis-url] [![Dependency status][dependency-image]][dependency-url]
 
 * Студент: [Лариса Козяровская](https://up.htmlacademy.ru/javascript/5/user/32887).
-* Наставник: `Неизвестно`.
+* Наставник: [Виталий Зюзин](https://htmlacademy.ru/profile/juwain).
 
 ---
 
