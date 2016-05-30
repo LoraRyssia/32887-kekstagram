@@ -1,3 +1,5 @@
+'use strict';
+
 function getMessage(a, b) {
 	if (typeof a === 'boolean') {
 		if (a) {
@@ -12,14 +14,14 @@ function getMessage(a, b) {
 	}
 	else if (Array.isArray(a) && !Array.isArray(b)) {
 		var sum = 0;
-		for (i=0, i < a.length, ++i ) {
+		for (var i=0; i < a.length; ++i ) {
 			sum += a[i];
 		}
 		return ('Количество красных точек во всех строчках изображения: ' + sum);
 	}
-	else (Array.isArray(a) && Array.isArray(b)) {
+	else if (Array.isArray(a) && Array.isArray(b)) {
 		var square = 0;
-		for (i=0, i < a.length, ++i ) {
+		for (var i=0; i < a.length; ++i ) {
 			square += (a[i]*b[i]);
 		}
 		return ('Общая площадь артефактов сжатия: ' + square + ' пикселей');
