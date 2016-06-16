@@ -81,6 +81,7 @@
      */
     redraw: function() {
       // Очистка изображения.
+
       this._ctx.clearRect(0, 0, this._container.width, this._container.height);
 
       // Параметры линии.
@@ -114,11 +115,33 @@
 
       // Отрисовка прямоугольника, обозначающего область изображения после
       // кадрирования. Координаты задаются от центра.
-      this._ctx.strokeRect(
-          (-this._resizeConstraint.side / 2) - this._ctx.lineWidth / 2,
-          (-this._resizeConstraint.side / 2) - this._ctx.lineWidth / 2,
-          this._resizeConstraint.side - this._ctx.lineWidth / 2,
-          this._resizeConstraint.side - this._ctx.lineWidth / 2);
+      var resCnst = -this._resizeConstraint.side / 2;
+      var lineWdth = this._ctx.lineWidth / 2;
+
+      this._ctx.beginPath();
+      this._ctx.moveTo(resCnst - lineWdth, resCnst - lineWdth);
+      this._ctx.lineTo(-2 * lineWdth - resCnst, resCnst - lineWdth);
+      this._ctx.lineTo(-2 * lineWdth - resCnst, -2 * lineWdth - resCnst);
+      this._ctx.lineTo(resCnst - lineWdth, -2 * lineWdth - resCnst);
+      this._ctx.lineTo(resCnst - lineWdth, resCnst - lineWdth);
+      this._ctx.stroke();
+      this._ctx.closePath();
+
+      //Отрисовка затемненной области
+
+      this._ctx.moveTo( -this._container.width / 2, -this._container.height / 2);
+      this._ctx.lineTo( (-this._container.width / 2) + this._container.width, -this._container.height / 2);
+      this._ctx.lineTo( (-this._container.width / 2) + this._container.width, (-this._container.height / 2) + this._container.height);
+      this._ctx.lineTo( -this._container.width / 2, (-this._container.height / 2) + this._container.height);
+      this._ctx.fillStyle = 'rgba(0, 0, 0, 0.8)';
+      this._ctx.fill('evenodd');
+
+      //Создание надписи с размерами
+      this._ctx.font = '16px Arial';
+      this._ctx.fillStyle = 'white';
+      this._ctx.textAlign = 'center';
+      this._ctx.textBaseline = 'bottom';
+      this._ctx.fillText(this._image.naturalWidth + ' x ' + this._image.naturalHeight, 0, (-this._resizeConstraint.side / 2) - this._ctx.lineWidth / 2 - 10);
 
       // Восстановление состояния канваса, которое было до вызова ctx.save
       // и последующего изменения системы координат. Нужно для того, чтобы
